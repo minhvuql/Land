@@ -839,9 +839,11 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
 .vx-lab { color: #0d47a1; background: #fff; border: 1.5px solid #0d47a1; border-radius: 10px; padding: 2px 5px; min-width: 12px; text-align: center; font: 800 13px/1 system-ui, sans-serif; box-shadow: 0 1px 3px rgba(0,0,0,.45); }
 
 /* Khung thông tin thửa */
-#fInfo { position: absolute; z-index: 1050; left: 0; right: 0; bottom: 0; max-height: 46%; overflow-y: auto; background: var(--panel); color: var(--text);
-  border-radius: 18px 18px 0 0; box-shadow: 0 -4px 20px rgba(0,0,0,.45); padding: 6px 14px calc(14px + env(safe-area-inset-bottom)); }
-#fInfo .fi-grip { width: 42px; height: 5px; border-radius: 3px; background: var(--muted); opacity: .6; margin: 2px auto 8px; }
+#fInfo { position: absolute; z-index: 1050; left: 0; right: 0; bottom: 0; max-height: 85%; overflow: hidden; background: var(--panel); color: var(--text);
+  border-radius: 18px 18px 0 0; box-shadow: 0 -4px 20px rgba(0,0,0,.45); padding: 0; display: flex; flex-direction: column; }
+#fInfo .fi-grip { width: 100%; min-height: 22px; display: flex; align-items: center; justify-content: center; cursor: ns-resize; touch-action: none; flex: 0 0 auto; }
+#fInfo .fi-grip::after { content: ''; width: 42px; height: 5px; border-radius: 3px; background: var(--muted); opacity: .6; }
+#fInfo .fi-body { flex: 1 1 auto; overflow-y: auto; padding: 0 14px calc(14px + env(safe-area-inset-bottom)); }
 #fInfo .fi-head { display: flex; align-items: center; gap: 10px; }
 #fInfo .fi-title { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 16px; font-weight: 700; color: #7cc4ff; }
 #fInfo .fi-nav { display: flex; align-items: center; gap: 6px; background: none; border: 0; color: #7cc4ff; font-size: 15px; white-space: nowrap; font-weight: 700; padding: 0; }
@@ -862,9 +864,10 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
 #fInfo .fi-more td:first-child { color: var(--muted); }
 #fInfo .fi-colors { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; flex-wrap: wrap; }
 #fInfo .fc-lab { font-size: 13px; color: var(--muted); white-space: nowrap; }
-#fInfo .fc-list { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; flex: 1 1 0%; }
-#fInfo .fc-dot { width: 28px; height: 28px; border-radius: 50%; padding: 0; border: 2px solid rgba(255,255,255,.25); box-shadow: 0 1px 3px rgba(0,0,0,.4); flex: 0 0 auto; }
-#fInfo .fc-dot.on { border-color: #fff; box-shadow: 0 0 0 2px var(--accent), 0 1px 4px rgba(0,0,0,.5); transform: scale(1.1); }
+#fInfo .fc-list { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; flex: 1 1 0%; }
+#fInfo .fc-dot { width: 26px; height: 26px; border-radius: 50%; padding: 0; border: 2px solid rgba(255,255,255,.25); box-shadow: 0 1px 3px rgba(0,0,0,.4); flex: 0 0 auto; cursor: pointer; transition: transform .1s; background-size: 8px 8px !important; }
+#fInfo .fc-dot:hover { transform: scale(1.15); }
+#fInfo .fc-dot.on { border-color: #fff; box-shadow: 0 0 0 2px var(--accent), 0 1px 4px rgba(0,0,0,.5); transform: scale(1.15); }
 #fInfo .fc-pick { position: relative; width: 28px; height: 28px; border-radius: 50%; background: var(--panel2); border: 1.5px solid var(--border); display: inline-flex; align-items: center; justify-content: center; font-size: 15px; cursor: pointer; overflow: hidden; flex: 0 0 auto; }
 #fInfo .fc-pick input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
 .inv-stats { margin: 8px 0 6px; padding: 8px 10px; background: var(--panel2); border: 1px solid var(--border); border-radius: 10px; font-size: 13.5px; }
@@ -874,6 +877,11 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
 .inv-chip i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
 .inv-badge { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 11.5px; color: #fff; font-weight: 600; margin-left: 4px; text-shadow: 0 1px 2px rgba(0,0,0,.5); }
 #fInfo .fc-clr { padding: 4px 9px; font-size: 12.5px; border-radius: 14px; background: var(--panel2); color: var(--text); border: 1px solid var(--border); }
+#fInfo .fc-htog { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; font-size: 12px; border-radius: 14px; background: var(--panel2); color: var(--muted); border: 1px solid var(--border); cursor: pointer; flex: 0 0 auto; white-space: nowrap; }
+#fInfo .fc-htog .ht-sw { width: 28px; height: 16px; border-radius: 8px; background: var(--border); position: relative; transition: background .2s; }
+#fInfo .fc-htog .ht-sw::after { content: ''; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: #fff; transition: left .2s; }
+#fInfo .fc-htog.on .ht-sw { background: var(--accent, #2979ff); }
+#fInfo .fc-htog.on .ht-sw::after { left: 14px; }
 #fInfo .fi-note { margin: 0 0 10px; }
 #fInfo .fn-inp { width: 100%; font-size: 13.5px; padding: 7px 10px; border-radius: 8px; background: var(--panel2); color: var(--text); border: 1px solid var(--border); box-sizing: border-box; }
 
@@ -1585,10 +1593,71 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
     0xEA: 'ờ', 0xEB: 'ở', 0xEC: 'ỡ', 0xED: 'ớ', 0xEE: 'ợ', 0xEF: 'ù', 0xF1: 'ủ', 0xF2: 'ũ', 0xF3: 'ú', 0xF4: 'ụ',
     0xF5: 'ừ', 0xF6: 'ử', 0xF7: 'ữ', 0xF8: 'ứ', 0xF9: 'ự', 0xFA: 'ỳ', 0xFB: 'ỷ', 0xFC: 'ỹ', 0xFD: 'ý', 0xFE: 'ỵ'
   };
-  /** bytes (mảng số 0-255) -> chuỗi; byte >= 0x80 hiểu theo TCVN3. */
-  function tcvn3(bytes) {
+  // Bảng ánh xạ byte dấu thanh TCVN3 → chữ cái gốc lowercase (dùng cho composite uppercase)
+  const TCVN3_BASE = {
+    0xB5:'a',0xB6:'a',0xB7:'a',0xB8:'a',0xB9:'a',
+    0xBB:'ă',0xBC:'ă',0xBD:'ă',0xBE:'ă',0xC6:'ă',
+    0xC7:'â',0xC8:'â',0xC9:'â',0xCA:'â',0xCB:'â',
+    0xCC:'e',0xCE:'e',0xCF:'e',0xD0:'e',0xD1:'e',
+    0xD2:'ê',0xD3:'ê',0xD4:'ê',0xD5:'ê',0xD6:'ê',
+    0xD7:'i',0xD8:'i',0xDC:'i',0xDD:'i',0xDE:'i',
+    0xDF:'o',0xE1:'o',0xE2:'o',0xE3:'o',0xE4:'o',
+    0xE5:'ô',0xE6:'ô',0xE7:'ô',0xE8:'ô',0xE9:'ô',
+    0xEA:'ơ',0xEB:'ơ',0xEC:'ơ',0xED:'ơ',0xEE:'ơ',
+    0xEF:'u',0xF1:'u',0xF2:'u',0xF3:'u',0xF4:'u',
+    0xF5:'ư',0xF6:'ư',0xF7:'ư',0xF8:'ư',0xF9:'ư',
+    0xFA:'y',0xFB:'y',0xFC:'y',0xFD:'y',0xFE:'y'
+  };
+  // Byte chữ hoa gốc → chữ cái gốc lowercase tương ứng (dùng ghép composite uppercase)
+  const TCVN3_UBASE = {
+    0x41:'a',0x45:'e',0x49:'i',0x4F:'o',0x55:'u',0x59:'y',
+    0xA1:'ă',0xA2:'â',0xA3:'ê',0xA4:'ô',0xA5:'ơ',0xA6:'ư'
+  };
+  /** bytes (mảng số 0-255) → chuỗi Unicode.
+   *  Xử lý 3 trường hợp TCVN3:
+   *  1. Byte thường → tra bảng TCVN3 → ký tự thường (ả, ồ, ị…)
+   *  2. Ghép composite chữ hoa: byte chữ hoa gốc (A,E,Ă,Â…) + byte dấu → ký tự hoa (À,Ắ,Ầ…)
+   *  3. Heuristic phát hiện font chữ hoa (.VnTimeH…): ASCII hoa lẫn nguyên âm TCVN3 thường
+   *     trong cùng từ → toUpperCase() toàn chuỗi */
+  function tcvn3(bytes, skipFix) {
     let s = '';
-    for (const b of bytes) s += b >= 0x80 && TCVN3[b] ? TCVN3[b] : String.fromCharCode(b);
+    for (let i = 0; i < bytes.length; i++) {
+      const b = bytes[i];
+      if (b >= 0x80 && TCVN3[b]) {
+        // Kiểm tra ghép composite: byte trước là chữ hoa gốc, byte này là dấu thanh cùng gốc
+        if (i > 0 && TCVN3_UBASE[bytes[i-1]] !== undefined && TCVN3_BASE[b] === TCVN3_UBASE[bytes[i-1]]) {
+          s = s.slice(0, -1) + TCVN3[b].toUpperCase();
+        } else {
+          s += TCVN3[b];
+        }
+      } else {
+        s += String.fromCharCode(b);
+      }
+    }
+    return skipFix ? s : tcvn3FixCase(s);
+  }
+  /** Phát hiện chuỗi TCVN3 từ font chữ hoa (.VnTimeH, .VnArialH…).
+   *  Dấu hiệu: chữ ASCII hoa ở vị trí không phải đầu từ + nguyên âm TCVN3 thường
+   *  trong cùng từ (vd. "CHíNH", "bảN", "ĐịA") → toUpperCase toàn chuỗi */
+  function tcvn3FixCase(s) {
+    const RE_V = /[àảãáạằẳẵắặầẩẫấậèẻẽéẹềểễếệìỉĩíịòỏõóọồổỗốộờởỡớợùủũúụừửữứựỳỷỹýỵăâêôơưđĂÂÊÔƠƯĐ]/;
+    const RE_UB = /[ĂÂÊÔƠƯĐ]/;
+    const words = s.match(/[^\s]+/g);
+    if (!words) return s;
+    let anom = 0, vw = 0;
+    for (const w of words) {
+      if (w.length < 2 || !RE_V.test(w)) continue;
+      vw++;
+      let nfu = false;
+      for (let j = 1; j < w.length; j++) {
+        const c = w.charCodeAt(j);
+        if (c >= 65 && c <= 90) { nfu = true; break; }
+        if (RE_UB.test(w[j])) { nfu = true; break; }
+      }
+      const fla = w.charCodeAt(0) >= 97 && w.charCodeAt(0) <= 122;
+      if (nfu || (fla && /[A-Z]/.test(w))) anom++;
+    }
+    if (anom >= 2 || (anom >= 1 && vw <= 2)) return s.toUpperCase();
     return s;
   }
 
@@ -1669,7 +1738,7 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
     return 'unicode';
   }
 
-  global.CAD = { fromDxf, fromDwg, explode, aciColor, tcvn3, vniToUnicode, detectFontEncoding };
+  global.CAD = { fromDxf, fromDwg, explode, aciColor, tcvn3, tcvn3FixCase, vniToUnicode, detectFontEncoding };
 })(window);
 </script>
   <script>/*
@@ -1882,9 +1951,9 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
           if (e[to] === 0xff && e[to + 1] === 0xfd) {
             for (let i = 2; i + 1 < n && to + i + 1 < e.length; i += 2) text += String.fromCharCode(uint16(e, to + i));
           } else {
-            const bs = []; for (let i = 0; i < n && to + i < e.length; i++) bs.push(e[to + i]); text = CAD.tcvn3(bs);
+            const bs = []; for (let i = 0; i < n && to + i < e.length; i++) bs.push(e[to + i]); text = CAD.tcvn3(bs, true);
           }
-          ents.push({ t: 'text', p, text, h, rot, ...props });
+          ents.push({ t: 'text', p, text, h, rot, fontIdx: e[36], ...props });
           break;
         }
         default:
@@ -1892,6 +1961,49 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
       }
     }
     flushComplex();
+    /* ── Font-based uppercase detection (DGN V7) ── v5
+     * Font chữ hoa (.VnTimeH, .VnArialH…) lưu byte TCVN3 lowercase nhưng
+     * render uppercase. Phát hiện bằng: quét tất cả text, nếu 1 text có
+     * tỷ lệ từ bất thường (uppercase ASCII lẫn TCVN3 lowercase) ≥ 30%
+     * → font đó là font chữ hoa → toUpperCase() toàn bộ text trong font.
+     * Loại trừ: viết tắt (TNHH, HLBVĐB, CMĐ) chỉ có uppercase base chars
+     * mà không có nguyên âm TCVN3 lowercase; dấu ngoặc đầu từ; tên riêng
+     * có ít ký tự bất thường trong câu dài. */
+    const _RVL = /[àảãáạằẳẵắặầẩẫấậèẻẽéẹềểễếệìỉĩíịòỏõóọồổỗốộờởỡớợùủũúụừửữứựỳỷỹýỵăâêôơưđ]/;
+    const _LEAD = /^[^a-zA-ZàảãáạằẳẵắặầẩẫấậèẻẽéẹềểễếệìỉĩíịòỏõóọồổỗốộờởỡớợùủũúụừửữứựỳỷỹýỵăâêôơưđĂÂÊÔƠƯĐ]+/;
+    const _RUB = /[ĂÂÊÔƠƯĐ]/;
+    const _REV = /[àảãáạằẳẵắặầẩẫấậèẻẽéẹềểễếệìỉĩíịòỏõóọồổỗốộờởỡớợùủũúụừửữứựỳỷỹýỵăâêôơưđĂÂÊÔƠƯĐ]/;
+    function _isUpperText(s) {
+      const ws = s.match(/[^\s]+/g);
+      if (!ws) return false;
+      let anom = 0, vw = 0;
+      for (let w of ws) {
+        w = w.replace(_LEAD, '');
+        if (w.length < 2 || !_REV.test(w)) continue;
+        vw++;
+        if (!_RVL.test(w)) continue;
+        let nfu = false;
+        for (let j = 1; j < w.length; j++) {
+          const c = w.charCodeAt(j);
+          if (c >= 65 && c <= 90) { nfu = true; break; }
+          if (_RUB.test(w[j])) { nfu = true; break; }
+        }
+        const fla = w.charCodeAt(0) >= 97 && w.charCodeAt(0) <= 122;
+        if (nfu || (fla && /[A-Z]/.test(w))) anom++;
+      }
+      if (vw === 0) return false;
+      return (anom >= 2 || (anom >= 1 && vw <= 2)) && (anom / vw >= 0.3);
+    }
+    const upperFonts = new Set();
+    for (const ent of ents) {
+      if (ent.t !== 'text' || ent.fontIdx === undefined) continue;
+      if (_isUpperText(ent.text)) upperFonts.add(ent.fontIdx);
+    }
+    for (const ent of ents) {
+      if (ent.t !== 'text') continue;
+      if (upperFonts.has(ent.fontIdx)) { ent.text = ent.text.toUpperCase(); }
+      else { ent.text = CAD.tcvn3FixCase(ent.text); }
+    }
     return { ents, blocks: {}, levelMask };
   }
 
@@ -2239,25 +2351,29 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
       let p = s + 2, text = '';
       const bytes = new Uint8Array(z.buffer, z.byteOffset + p, Math.max(0, end - p));
       // DGN V8 text length field tại o+110: số byte text data (gồm marker+text)
-      // actualChars = _tLen - 4 (trừ 4 byte marker hoặc header nội bộ)
       const _tLen = (b + 8 <= z.length) ? dv.getUint16(b + 6, true) : 0;
-      const _maxC = _tLen > 4 ? _tLen - 4 : 0;
       // Encoding DGN V8: 0xFF 0xFD → skip 2, UTF-16LE
       // 0xFF 0xFE 0x01 0x00 → skip 4, TCVN3/ASCII (nhãn thửa: ONT, CLN...)
       // 0xFF 0xFE [khác 01 00] → skip 2, UTF-16LE (ký tự đầu là bytes[2:3])
       // Không marker: auto-detect UTF-16LE vs TCVN3
+      let _markerBytes = 0; // số byte marker thực tế (dùng tính _maxC)
       if (bytes.length >= 4 && bytes[0] === 0xff && bytes[1] === 0xfe && bytes[2] === 1 && bytes[3] === 0) {
+        _markerBytes = 4;
         let m = 4; while (m < bytes.length && bytes[m] >= 0x20 && !(bytes[m] >= 0x80 && bytes[m] <= 0xA0)) m++;
         text = CAD.tcvn3(bytes.subarray(4, m));
       } else if (bytes.length >= 2 && bytes[0] === 0xff && (bytes[1] === 0xfd || bytes[1] === 0xfe)) {
+        _markerBytes = 2;
         for (let i = 2; i + 1 < bytes.length; i += 2) { const c = bytes[i] | (bytes[i + 1] << 8); if (!c) break; text += String.fromCharCode(c); }
       } else if (bytes.length >= 4 && bytes[1] === 0 && bytes[3] === 0) {
+        _markerBytes = 0;
         for (let i = 0; i + 1 < bytes.length; i += 2) { const c = bytes[i] | (bytes[i + 1] << 8); if (!c) break; text += String.fromCharCode(c); }
       } else {
+        _markerBytes = 0;
         let m = 0; while (m < bytes.length && bytes[m] >= 0x20 && !(bytes[m] >= 0x80 && bytes[m] <= 0xA0)) m++;
         text = CAD.tcvn3(bytes.subarray(0, m));
       }
-      // Trim ký tự rác cuối do word-alignment padding (nChars luôn = 0 nên dùng _tLen)
+      // Trim ký tự rác cuối do word-alignment padding — trừ đúng số byte marker thực tế
+      const _maxC = _tLen > _markerBytes ? _tLen - _markerBytes : 0;
       if (_maxC > 0 && text.length > _maxC) text = text.substring(0, _maxC);
       return text ? { p: [ox, oy], text, h, rot, hm, hr } : null;
     }
@@ -3443,11 +3559,12 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
       const cv = (opt.colorOf && opt.colorOf(f)) || '#ffeb3b';
       const col = typeof cv === 'string' ? cv : cv.c, fill = typeof cv === 'string' ? '' : (cv.fill || '');
       const mark = typeof cv === 'object' && cv && cv.mark ? 1 : 0;
+      const ht = typeof cv === 'object' && cv && cv.ht ? cv.ht : '';
       const dash = f.props && f.props.style ? f.props.style : 0;
       const fw = f.props && f.props.w ? f.props.w : 0;
-      const sk = col + '|' + dash + '|' + fill + '|' + fw + '|' + mark;
+      const sk = col + '|' + dash + '|' + fill + '|' + fw + '|' + mark + '|' + ht;
       let si = styleIdx[sk];
-      if (si === undefined) { si = styles.length; styleIdx[sk] = si; styles.push({ color: col, dash, fill, w: fw, mark }); }
+      if (si === undefined) { si = styles.length; styleIdx[sk] = si; styles.push({ color: col, dash, fill, w: fw, mark, ht }); }
       fStyle[i] = si;
       fLid[i] = opt.lidOf ? opt.lidOf(f) : 0;
       const start0 = w;
@@ -3598,7 +3715,7 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
       const mx = d.mx, my = d.my, pStart = d.pStart, pLen = d.pLen, fPart = d.fPart, fBox = d.fBox, fKind = d.fKind;
       const w = this.weight;
       // DGN line style dash patterns (style 0-7)
-      const dgnDash = [[], [2, 2], [6, 3], [12, 4], [12, 3, 2, 3], [4, 2], [12, 3, 2, 3, 2, 3], [12, 4, 6, 4]];
+      const dgnDash = [[], [6, 6], [14, 7], [24, 8], [24, 6, 4, 6], [10, 6], [24, 6, 4, 6, 4, 6], [24, 8, 14, 8]];
       const trace = (ctx, p) => {
         const s = pStart[p], n = pLen[p];
         let lx = (mx[s] - X0) * k, ly = (Y1 - my[s]) * k;
@@ -3644,7 +3761,14 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
             for (let a = c0; a < e; a++) { const i = polys[a]; for (let p = fPart[i]; p < fPart[i + 1]; p++) { trace(ctx, p); ctx.closePath(); } }
             if (doFill) {
               // tô màu đánh dấu theo dõi, màu loại đất (theo bảng màu Thông tư) hoặc phủ mờ màu nét
-              if (st.mark) { ctx.fillStyle = st.fill || st.color; ctx.globalAlpha = Math.max(0.45, this.fillAlpha || 0.45); }
+              if (st.mark) {
+                // nền trắng mờ trước để hatch rõ trên nền bản đồ
+                ctx.fillStyle = '#ffffff'; ctx.globalAlpha = 0.35; ctx.fill('evenodd');
+                // hatch pattern
+                const hp = st.ht ? (typeof window.makeHatch === 'function' ? window.makeHatch(ctx, st.fill || st.color, st.ht) : null) : null;
+                if (hp) { ctx.fillStyle = hp; } else { ctx.fillStyle = st.fill || st.color; }
+                ctx.globalAlpha = Math.max(0.7, this.fillAlpha || 0.7);
+              }
               else if (st.fill) { ctx.fillStyle = st.fill; ctx.globalAlpha = this.fillAlpha != null ? this.fillAlpha : 0.55; }
               else ctx.globalAlpha = 0.07;
               ctx.fill('evenodd'); ctx.globalAlpha = 1; ctx.fillStyle = st.color;
@@ -3739,10 +3863,12 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
       const cv = (colorOf && colorOf(f)) || '#ffeb3b';
       const col = typeof cv === 'string' ? cv : cv.c, fill = typeof cv === 'string' ? '' : (cv.fill || '');
       const mark = typeof cv === 'object' && cv && cv.mark ? 1 : 0;
-      const dash = f.props && f.props.style ? 1 : 0;
-      const k = col + '|' + dash + '|' + fill + '|' + mark;
+      const ht = typeof cv === 'object' && cv && cv.ht ? cv.ht : '';
+      const dash = f.props && f.props.style ? f.props.style : 0;
+      const fw = f.props && f.props.w ? f.props.w : 0;
+      const k = col + '|' + dash + '|' + fill + '|' + fw + '|' + mark + '|' + ht;
       let si = idx[k];
-      if (si === undefined) { si = styles.length; idx[k] = si; styles.push({ color: col, dash, fill, mark }); }
+      if (si === undefined) { si = styles.length; idx[k] = si; styles.push({ color: col, dash, fill, w: fw, mark, ht }); }
       d.fStyle[i] = si;
     }
     d.styles = styles;
@@ -5211,7 +5337,7 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
     // DGN V7: ẩn level bị tắt trong View 1 của file gốc
     if (ds.levelMask !== null && ds.levelMask !== undefined) {
       const mask = ds.levelMask;
-      for (let lv = 1; lv <= 63; lv++) {
+      for (let lv = 0; lv < 63; lv++) {
         if (!(mask & (1n << BigInt(lv)))) Ly.hidden.add(String(lv));
       }
     }
@@ -5281,15 +5407,99 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
   }
 
   // ========== Kiểm kê – màu đánh dấu thửa ==========
+  let useHatch = localStorage.getItem('lt_hatch') !== '0'; // true = hatch, false = solid; tự lưu
+  let showEdges = localStorage.getItem('lt_edges') !== '0'; // true = hiện cạnh; tự lưu
+  let showVerts = localStorage.getItem('lt_verts') !== '0'; // true = hiện đỉnh; tự lưu
   const MARK_COLORS = [
-    { c: '#22c55e', l: 'Đã xong',      n: 'Xanh lá (Đã xong)' },
-    { c: '#eab308', l: 'Đang xử lý',   n: 'Vàng (Đang xử lý)' },
-    { c: '#f97316', l: 'Chờ bổ sung',   n: 'Cam (Chờ bổ sung)' },
-    { c: '#ef4444', l: 'Cần kiểm tra',  n: 'Đỏ (Cần kiểm tra)' },
-    { c: '#3b82f6', l: 'Đã đo đạc',    n: 'Xanh dương (Đã đo đạc)' },
-    { c: '#a855f7', l: 'Tím',           n: 'Tím' },
-    { c: '#ec4899', l: 'Hồng',          n: 'Hồng' }
+    { c: '#22c55e', l: 'Đã xong',      n: 'Xanh lá – Đã xong',      h: 'fdiag' },
+    { c: '#eab308', l: 'Đang xử lý',   n: 'Vàng – Đang xử lý',      h: 'bdiag' },
+    { c: '#f97316', l: 'Chờ bổ sung',   n: 'Cam – Chờ bổ sung',      h: 'cross' },
+    { c: '#ef4444', l: 'Cần kiểm tra',  n: 'Đỏ – Cần kiểm tra',      h: 'horiz' },
+    { c: '#3b82f6', l: 'Đã đo đạc',    n: 'Xanh dương – Đã đo đạc',  h: 'vert' },
+    { c: '#a855f7', l: 'Tím',           n: 'Tím',                      h: 'grid' },
+    { c: '#ec4899', l: 'Hồng',          n: 'Hồng',                     h: 'diaggrid' },
+    { c: '#06b6d4', l: 'Cyan',          n: 'Xanh ngọc',                h: 'dots' },
+    { c: '#f43f5e', l: 'Đỏ hồng',      n: 'Đỏ hồng',                  h: 'dash' },
+    { c: '#84cc16', l: 'Xanh non',      n: 'Xanh non',                 h: 'zigzag' },
+    { c: '#14b8a6', l: 'Teal',          n: 'Teal',                     h: 'wave' },
+    { c: '#f59e0b', l: 'Vàng đậm',     n: 'Vàng đậm',                 h: 'diamond' },
+    { c: '#8b5cf6', l: 'Tím nhạt',     n: 'Tím nhạt',                 h: 'brick' }
   ];
+
+  /** Tạo CanvasPattern cho hatch. Trả về pattern hoặc null. */
+  const _hatchCache = {};
+  function makeHatch(ctx2d, color, type) {
+    const key = color + '|' + type;
+    if (_hatchCache[key]) return _hatchCache[key];
+    const sz = 12, c = document.createElement('canvas');
+    c.width = sz; c.height = sz;
+    const g = c.getContext('2d');
+    g.strokeStyle = color; g.fillStyle = color; g.lineWidth = 1.6;
+    switch (type) {
+      case 'fdiag': // gạch chéo phải ///
+        g.beginPath(); g.moveTo(-2,sz); g.lineTo(sz,- 2); g.moveTo(-2+sz,sz); g.lineTo(sz+sz,-2); g.stroke(); break;
+      case 'bdiag': // gạch chéo trái \\\
+        g.beginPath(); g.moveTo(sz+2,sz); g.lineTo(0,-2); g.moveTo(2,sz); g.lineTo(-sz,-2); g.stroke(); break;
+      case 'cross': // gạch chéo X
+        g.beginPath(); g.moveTo(-2,sz); g.lineTo(sz,-2); g.moveTo(-2+sz,sz); g.lineTo(sz+sz,-2);
+        g.moveTo(sz+2,sz); g.lineTo(0,-2); g.moveTo(2,sz); g.lineTo(-sz,-2); g.stroke(); break;
+      case 'horiz': // ngang —
+        g.beginPath(); g.moveTo(0,sz/2); g.lineTo(sz,sz/2); g.stroke(); break;
+      case 'vert': // dọc |
+        g.beginPath(); g.moveTo(sz/2,0); g.lineTo(sz/2,sz); g.stroke(); break;
+      case 'grid': // lưới +
+        g.beginPath(); g.moveTo(0,sz/2); g.lineTo(sz,sz/2); g.moveTo(sz/2,0); g.lineTo(sz/2,sz); g.stroke(); break;
+      case 'diaggrid': // lưới chéo
+        g.lineWidth = 1.2;
+        g.beginPath(); g.moveTo(0,0); g.lineTo(sz,sz); g.moveTo(sz,0); g.lineTo(0,sz); g.stroke(); break;
+      case 'dots': // chấm tròn
+        g.beginPath(); g.arc(sz/2,sz/2,2,0,6.2832); g.fill(); break;
+      case 'dash': // gạch ngang ngắt
+        g.lineWidth = 2;
+        g.beginPath(); g.moveTo(1,sz/2); g.lineTo(sz/2-1,sz/2); g.stroke(); break;
+      case 'zigzag': // zigzag
+        g.lineWidth = 1.4;
+        g.beginPath(); g.moveTo(0,sz*0.75); g.lineTo(sz/4,sz*0.25); g.lineTo(sz/2,sz*0.75); g.lineTo(sz*0.75,sz*0.25); g.lineTo(sz,sz*0.75); g.stroke(); break;
+      case 'wave': // sóng
+        g.lineWidth = 1.4;
+        g.beginPath(); g.moveTo(0,sz/2);
+        g.bezierCurveTo(sz*0.25,0, sz*0.75,sz, sz,sz/2); g.stroke(); break;
+      case 'diamond': // hình thoi
+        g.beginPath(); g.moveTo(sz/2,1); g.lineTo(sz-1,sz/2); g.lineTo(sz/2,sz-1); g.lineTo(1,sz/2); g.closePath(); g.stroke(); break;
+      case 'brick': // gạch xây
+        g.lineWidth = 1.2;
+        g.beginPath(); g.moveTo(0,sz/2); g.lineTo(sz,sz/2); g.moveTo(0,sz); g.lineTo(sz,sz);
+        g.moveTo(sz/2,0); g.lineTo(sz/2,sz/2); g.moveTo(0,sz/2); g.lineTo(0,sz); g.moveTo(sz,sz/2); g.lineTo(sz,sz); g.stroke(); break;
+      default: return null;
+    }
+    const pat = ctx2d.createPattern(c, 'repeat');
+    _hatchCache[key] = pat;
+    return pat;
+  }
+  /** Lấy loại hatch theo màu hex */
+  function hatchOf(hex) { const m = MARK_COLORS.find(c => c.c === hex); return m ? m.h : 'fdiag'; }
+  // expose ra global để Block 14 (FastLayer IIFE) truy cập được
+  window.makeHatch = makeHatch;
+  /** CSS background cho nút dot preview hatch */
+  function _dotBg(col, ht) {
+    const w = 'rgba(255,255,255,0.45)';
+    switch (ht) {
+      case 'fdiag': return 'background:repeating-linear-gradient(45deg,' + col + ' 0,' + col + ' 2px,' + w + ' 2px,' + w + ' 5px)';
+      case 'bdiag': return 'background:repeating-linear-gradient(-45deg,' + col + ' 0,' + col + ' 2px,' + w + ' 2px,' + w + ' 5px)';
+      case 'cross': return 'background:repeating-linear-gradient(45deg,' + col + ' 0,' + col + ' 1.5px,transparent 1.5px,transparent 4px),repeating-linear-gradient(-45deg,' + col + ' 0,' + col + ' 1.5px,' + w + ' 1.5px,' + w + ' 4px)';
+      case 'horiz': return 'background:repeating-linear-gradient(0deg,' + col + ' 0,' + col + ' 2px,' + w + ' 2px,' + w + ' 5px)';
+      case 'vert': return 'background:repeating-linear-gradient(90deg,' + col + ' 0,' + col + ' 2px,' + w + ' 2px,' + w + ' 5px)';
+      case 'grid': return 'background:repeating-linear-gradient(0deg,' + col + ' 0,' + col + ' 1.5px,transparent 1.5px,transparent 4px),repeating-linear-gradient(90deg,' + col + ' 0,' + col + ' 1.5px,' + w + ' 1.5px,' + w + ' 4px)';
+      case 'diaggrid': return 'background:repeating-linear-gradient(45deg,' + col + ' 0,' + col + ' 1px,transparent 1px,transparent 4px),repeating-linear-gradient(-45deg,' + col + ' 0,' + col + ' 1px,' + w + ' 1px,' + w + ' 4px)';
+      case 'dots': return 'background:radial-gradient(circle 1.5px,' + col + ' 99%,' + w + ' 100%)';
+      case 'dash': return 'background:repeating-linear-gradient(0deg,' + col + ' 0,' + col + ' 3px,transparent 3px,transparent 5px),repeating-linear-gradient(90deg,transparent 0,transparent 3px,' + w + ' 3px,' + w + ' 6px)';
+      case 'zigzag': return 'background:linear-gradient(135deg,' + col + ' 25%,transparent 25%) -3px 0/6px 6px,linear-gradient(225deg,' + col + ' 25%,transparent 25%) -3px 0/6px 6px,linear-gradient(315deg,' + col + ' 25%,transparent 25%)/6px 6px,linear-gradient(45deg,' + col + ' 25%,' + w + ' 25%)/6px 6px';
+      case 'wave': return 'background:repeating-linear-gradient(30deg,' + col + ' 0,' + col + ' 2px,' + w + ' 2px,' + w + ' 6px)';
+      case 'diamond': return 'background:linear-gradient(45deg,' + col + ' 25%,transparent 25%,transparent 75%,' + col + ' 75%)/6px 6px,linear-gradient(45deg,' + col + ' 25%,' + w + ' 25%,' + w + ' 75%,' + col + ' 75%)/6px 6px;background-position:0 0,3px 3px';
+      case 'brick': return 'background:repeating-linear-gradient(0deg,' + col + ' 0,' + col + ' 1.5px,transparent 1.5px,transparent 5px),repeating-linear-gradient(90deg,' + col + ' 0,' + col + ' 1.5px,' + w + ' 1.5px,' + w + ' 8px)';
+      default: return 'background:' + col;
+    }
+  }
   function markLabelOf(hex) { const m = MARK_COLORS.find(c => c.c === hex); return m ? m.l : hex; }
   function markColorOfVal(val) { if (!val) return null; const m = MARK_COLORS.find(c => c.l === val || c.c === val); return m ? m.c : val; }
 
@@ -5357,7 +5567,7 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
       const ranhLv = new Set(Ly.closeUsed ? Ly.closeUsed.levels.map(String) : []);
       return (f) => {
         // ưu tiên màu kiểm kê
-        if (f.markColor) return { c: f.markColor, fill: f.markColor, mark: 1 };
+        if (f.markColor) return { c: f.markColor, fill: f.markColor, mark: 1, ht: useHatch ? hatchOf(f.markColor) : '' };
         const isRanh = Ly.isCad ? !f.auto && f.props && f.props.layer != null && ranhLv.has(lvNorm(f.props.layer)) : f.kind === 'polygon';
         const base = f.auto ? 'transparent' : isRanh ? RANH : (f.props && f.props.color) || '#ffeb3b';
         if (f.kind !== 'polygon') return base;
@@ -5368,7 +5578,7 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
     }
     return (f) => {
       // ưu tiên màu kiểm kê
-      if (f.markColor) return { c: f.markColor, fill: f.markColor, mark: 1 };
+      if (f.markColor) return { c: f.markColor, fill: f.markColor, mark: 1, ht: useHatch ? hatchOf(f.markColor) : '' };
       return f.auto ? 'transparent' : one || (f.props && f.props.color) || '#ffeb3b';
     };
   };
@@ -5525,6 +5735,7 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
   function showGeomLabels(Ly, f) {
     if (geomLabels) { map.removeLayer(geomLabels); geomLabels = null; }
     geomSel = { Ly, f };
+    if (!showEdges && !showVerts) return; // cả hai tắt → không vẽ gì
     if (f.kind !== 'polygon' && f.kind !== 'line') return;
     let pts = f.pts.slice();
     const closed = f.kind === 'polygon';
@@ -5539,33 +5750,37 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
     pr.forEach((p, i) => { cx += p.x; cy += p.y; const q = pr[(i + 1) % n]; sa += p.x * q.y - q.x * p.y; });
     cx /= n; cy /= n;
     const g = L.layerGroup();
-    const nE = closed ? n : n - 1;
-    for (let i = 0; i < nE; i++) {
-      const j = (i + 1) % n, p = pr[i], q = pr[j];
-      const len = Math.hypot(mp[j][0] - mp[i][0], mp[j][1] - mp[i][1]);
-      if (!(len > 0)) continue;
-      const txt = fmt(len, 1) + ' m';
-      // cạnh quá ngắn trên màn hình thì không ghi (tránh chồng chữ)
-      if (px[i].distanceTo(px[j]) < txt.length * 5.5) continue;
-      const dx = q.x - p.x, dy = q.y - p.y, d = Math.hypot(dx, dy) || 1;
-      let ang = -Math.atan2(dy, dx) * 180 / Math.PI;
-      if (ang > 90) ang -= 180; else if (ang < -90) ang += 180;
-      // ghi chữ ra phía ngoài thửa
-      const s = closed ? (sa > 0 ? -1 : 1) : 1;
-      const ox = -dy / d * s * 11, oy = dx / d * s * 11;
-      const mid = map.options.crs.unproject(L.point((p.x + q.x) / 2, (p.y + q.y) / 2));
-      g.addLayer(L.marker(mid, { interactive: false, keyboard: false, icon: L.divIcon({ className: 'gl-icon', iconSize: [0, 0], html: '<span class="ed-lab" style="transform:translate(-50%,-50%) translate(' + ox.toFixed(1) + 'px,' + (-oy).toFixed(1) + 'px) rotate(' + ang.toFixed(1) + 'deg)">' + txt + '</span>' }) }));
+    // Cạnh (chiều dài)
+    if (showEdges) {
+      const nE = closed ? n : n - 1;
+      for (let i = 0; i < nE; i++) {
+        const j = (i + 1) % n, p = pr[i], q = pr[j];
+        const len = Math.hypot(mp[j][0] - mp[i][0], mp[j][1] - mp[i][1]);
+        if (!(len > 0)) continue;
+        const txt = fmt(len, 1) + ' m';
+        if (px[i].distanceTo(px[j]) < txt.length * 5.5) continue;
+        const dx = q.x - p.x, dy = q.y - p.y, d = Math.hypot(dx, dy) || 1;
+        let ang = -Math.atan2(dy, dx) * 180 / Math.PI;
+        if (ang > 90) ang -= 180; else if (ang < -90) ang += 180;
+        const s = closed ? (sa > 0 ? -1 : 1) : 1;
+        const ox = -dy / d * s * 11, oy = dx / d * s * 11;
+        const mid = map.options.crs.unproject(L.point((p.x + q.x) / 2, (p.y + q.y) / 2));
+        g.addLayer(L.marker(mid, { interactive: false, keyboard: false, icon: L.divIcon({ className: 'gl-icon', iconSize: [0, 0], html: '<span class="ed-lab" style="transform:translate(-50%,-50%) translate(' + ox.toFixed(1) + 'px,' + (-oy).toFixed(1) + 'px) rotate(' + ang.toFixed(1) + 'deg)">' + txt + '</span>' }) }));
+      }
     }
-    let lastPx = null;
-    for (let i = 0; i < n; i++) {
-      g.addLayer(L.circleMarker(lls[i], { radius: 3, color: '#ff1744', weight: 1.5, fillColor: '#fff', fillOpacity: 1, interactive: false }));
-      if (lastPx && lastPx.distanceTo(px[i]) < 22) continue; // đỉnh sát nhau: bỏ bớt số
-      lastPx = px[i];
-      let ux = pr[i].x - cx, uy = pr[i].y - cy; const d = Math.hypot(ux, uy) || 1; ux /= d; uy /= d;
-      g.addLayer(L.marker(lls[i], { interactive: false, keyboard: false, icon: L.divIcon({ className: 'gl-icon', iconSize: [0, 0], html: '<span class="vx-lab" style="transform:translate(-50%,-50%) translate(' + (ux * 17).toFixed(1) + 'px,' + (-uy * 17).toFixed(1) + 'px)">' + (i + 1) + '</span>' }) }));
-    }
-    if (closed) {
-      try { const c = Attr.labelPoint(pts.map(q => ({ E: q[0], N: q[1] }))); const ll = Ly.P([c.E, c.N]); g.addLayer(L.circleMarker(ll, { radius: 7, stroke: false, fillColor: '#ff1744', fillOpacity: 1, interactive: false })); } catch (e) { }
+    // Đỉnh (số thứ tự + chấm tròn)
+    if (showVerts) {
+      let lastPx = null;
+      for (let i = 0; i < n; i++) {
+        g.addLayer(L.circleMarker(lls[i], { radius: 3, color: '#ff1744', weight: 1.5, fillColor: '#fff', fillOpacity: 1, interactive: false }));
+        if (lastPx && lastPx.distanceTo(px[i]) < 22) continue;
+        lastPx = px[i];
+        let ux = pr[i].x - cx, uy = pr[i].y - cy; const d = Math.hypot(ux, uy) || 1; ux /= d; uy /= d;
+        g.addLayer(L.marker(lls[i], { interactive: false, keyboard: false, icon: L.divIcon({ className: 'gl-icon', iconSize: [0, 0], html: '<span class="vx-lab" style="transform:translate(-50%,-50%) translate(' + (ux * 17).toFixed(1) + 'px,' + (-uy * 17).toFixed(1) + 'px)">' + (i + 1) + '</span>' }) }));
+      }
+      if (closed) {
+        try { const c = Attr.labelPoint(pts.map(q => ({ E: q[0], N: q[1] }))); const ll = Ly.P([c.E, c.N]); g.addLayer(L.circleMarker(ll, { radius: 7, stroke: false, fillColor: '#ff1744', fillOpacity: 1, interactive: false })); } catch (e) { }
+      }
     }
     geomLabels = g.addTo(map);
   }
@@ -5620,17 +5835,22 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
     const curNote = (f.props && f.props.GHI_CHU_KK) || '';
     // dựng HTML đổi màu
     const dotsHtml = MARK_COLORS.map(mc =>
-      '<button class="fc-dot' + (curColor === mc.c ? ' on' : '') + '" data-c="' + mc.c + '" title="' + mc.n + '" style="background:' + mc.c + '"></button>'
+      '<button class="fc-dot' + (curColor === mc.c ? ' on' : '') + '" data-c="' + mc.c + '" title="' + mc.n + '" style="' + _dotBg(mc.c, mc.h) + '"></button>'
     ).join('');
     const colorHtml =
       '<div class="fi-colors"><span class="fc-lab">Đổi màu:</span><div class="fc-list">' + dotsHtml +
       '<label class="fc-pick" title="Chọn màu khác"><input type="color" class="fc-inp" value="' + (curColor || '#22c55e') + '"><span>🎨</span></label>' +
-      '<button class="fc-clr' + (curColor ? '' : ' hidden') + '" title="Bỏ màu (về mặc định)">↺ Bỏ</button></div></div>';
+      '<button class="fc-clr' + (curColor ? '' : ' hidden') + '" title="Bỏ màu (về mặc định)">↺ Bỏ</button>' +
+      '<button class="fc-htog' + (useHatch ? ' on' : '') + '" title="Hatch / Solid">Hatch<span class="ht-sw"></span></button>' +
+      '<button class="fc-htog fc-edge' + (showEdges ? ' on' : '') + '" title="Hiện/ẩn chiều dài cạnh">Cạnh<span class="ht-sw"></span></button>' +
+      '<button class="fc-htog fc-vert' + (showVerts ? ' on' : '') + '" title="Hiện/ẩn đỉnh thửa đất">Đỉnh<span class="ht-sw"></span></button>' +
+      '</div></div>';
     const noteHtml = '<div class="fi-note"><input type="text" class="fn-inp" placeholder="Ghi chú kiểm kê (vd: đã ký giáp ranh, vắng chủ…)" value="' + esc(curNote) + '"></div>';
 
     const box = $('fInfo');
     box.innerHTML =
       '<div class="fi-grip"></div>' +
+      '<div class="fi-body">' +
       '<div class="fi-head"><div class="fi-title">🧭 ' + (f.kind === 'polygon' ? 'Thông tin thửa đất' : 'Thông tin đối tượng') + '</div>' +
       '<button class="fi-nav"><span class="fi-car">🚗</span>Dẫn đường</button><button class="fi-x" aria-label="Đóng">✕</button></div>' +
       '<div class="fi-card"><div class="fi-l1">' + (head.join(sep) || esc(Ly.name)) + '</div>' + (line2.length ? '<div class="fi-l2">' + line2.join(sep) + '</div>' : '') +
@@ -5638,8 +5858,33 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
       '<div class="fi-src">' + esc(Ly.name) + '</div></div>' +
       colorHtml + noteHtml +
       '<div class="fi-btns"><button class="pc">📍 Tọa độ</button><button class="pt">☰ Thuộc tính</button><button class="pd">⬇ CAD</button></div>' +
-      (rows ? '<details class="fi-more"><summary>Tất cả thuộc tính</summary><table>' + rows + '</table></details>' : '');
+      (rows ? '<details class="fi-more"><summary>Tất cả thuộc tính</summary><table>' + rows + '</table></details>' : '') +
+      '</div>';
     box.classList.remove('hidden');
+    // restore chiều cao đã kéo trước đó (nếu có)
+    if (box._savedH) box.style.height = box._savedH + 'px';
+
+    // === Kéo grip để resize panel ===
+    const grip = box.querySelector('.fi-grip');
+    if (grip) {
+      let startY, startH;
+      const onMove = (e) => {
+        const y = e.touches ? e.touches[0].clientY : e.clientY;
+        const newH = Math.max(80, Math.min(window.innerHeight * 0.85, startH + (startY - y)));
+        box.style.height = newH + 'px';
+        box._savedH = newH;
+      };
+      const onEnd = () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onEnd); document.removeEventListener('touchmove', onMove); document.removeEventListener('touchend', onEnd); };
+      const onStart = (e) => {
+        startY = e.touches ? e.touches[0].clientY : e.clientY;
+        startH = box.offsetHeight;
+        document.addEventListener('mousemove', onMove); document.addEventListener('mouseup', onEnd);
+        document.addEventListener('touchmove', onMove, { passive: false }); document.addEventListener('touchend', onEnd);
+        e.preventDefault();
+      };
+      grip.addEventListener('mousedown', onStart);
+      grip.addEventListener('touchstart', onStart, { passive: false });
+    }
 
     // === Gắn sự kiện cho nút đổi màu ===
     function syncColorUI(col) {
@@ -5656,6 +5901,34 @@ body.time-on #fab { bottom: calc(170px + env(safe-area-inset-bottom)); }
     if (fcInp) fcInp.oninput = () => { setFeatureColor(Ly, fis, fcInp.value); syncColorUI(fcInp.value); };
     const fcClr = box.querySelector('.fc-clr');
     if (fcClr) fcClr.onclick = () => { setFeatureColor(Ly, fis, null); syncColorUI(null); };
+    const fcHtog = box.querySelector('.fc-htog');
+    if (fcHtog) fcHtog.onclick = () => {
+      useHatch = !useHatch;
+      localStorage.setItem('lt_hatch', useHatch ? '1' : '0');
+      fcHtog.classList.toggle('on', useHatch);
+      // cập nhật preview dots
+      box.querySelectorAll('.fc-dot').forEach((d, idx) => {
+        const mc = MARK_COLORS[idx]; if (!mc) return;
+        d.setAttribute('style', useHatch ? _dotBg(mc.c, mc.h) : 'background:' + mc.c);
+      });
+      // restyle + redraw tất cả layers
+      layers.forEach(L2 => { if (L2.data && L2.fast) { L.FastLayer.restyle(L2.data, L2.features, colorOf(L2)); L2.fast.redraw(); } });
+    };
+    // === Gắn sự kiện cho toggle Cạnh / Đỉnh ===
+    const fcEdge = box.querySelector('.fc-edge');
+    if (fcEdge) fcEdge.onclick = () => {
+      showEdges = !showEdges;
+      localStorage.setItem('lt_edges', showEdges ? '1' : '0');
+      fcEdge.classList.toggle('on', showEdges);
+      if (geomSel) showGeomLabels(geomSel.Ly, geomSel.f);
+    };
+    const fcVert = box.querySelector('.fc-vert');
+    if (fcVert) fcVert.onclick = () => {
+      showVerts = !showVerts;
+      localStorage.setItem('lt_verts', showVerts ? '1' : '0');
+      fcVert.classList.toggle('on', showVerts);
+      if (geomSel) showGeomLabels(geomSel.Ly, geomSel.f);
+    };
     // === Gắn sự kiện cho ghi chú kiểm kê ===
     const fnInp = box.querySelector('.fn-inp');
     if (fnInp) fnInp.onchange = () => {
