@@ -2524,8 +2524,12 @@ body.note-mode #btnNote { background: #ff9800; color: #fff; }
   const ORIGINS = [[0, 0], [500000, 1000000]];
   const okVN = (a, b) => (a > 100000 && a < 900000 && b > 800000 && b < 2700000) || (b > 100000 && b < 900000 && a > 800000 && a < 2700000);
   /**
-   * Chọn hệ số đổi UOR -> mét (và gốc tọa độ) theo trung vị tọa độ
-   * (không bị một vài phần tử lạc ở gốc 0,0 làm sai). Gốc tìm được ghi vào model.origin.
+   * Chọn hệ số đổi UOR -> mét (và gốc tọa độ) theo trung vị tọa độ.
+   * Thử CẢ HAI không-origin VÀ có-origin cho MỖI d trước khi sang d tiếp,
+   * theo thứ tự ưu tiên [1e3, 1e6, 1, 1e4, 1e5, 1e2].
+   * → d=1000 với origin sẽ match trước d=100 không origin.
+   * Sửa bug: file có toạ độ mm (d=1000 + origin 500K/1M) trước đây bị chọn
+   *   nhầm d=100 vì okVN pass ở vòng no-origin trước.
    */
   function autoScale(model, forced) {
     model.origin = [0, 0];
@@ -2535,8 +2539,13 @@ body.note-mode #btnNote { background: #ff9800; color: #fff; }
       return forced;
     }
     if (!isFinite(mx)) return 1;
-    for (const d of [1e3, 1e6, 1, 1e4, 1e5, 1e2]) if (okVN(mx / d, my / d)) { model.origin = [0, 0]; return d; }
-    for (const d of [1e3, 1e6, 1, 1e4, 1e5, 1e2]) for (const o of ORIGINS) { if (!o[0]) continue; if (Math.max(Math.abs(mx / d), Math.abs(my / d)) > 10000 && okVN(mx / d + o[0], my / d + o[1])) { model.origin = o; return d; } }
+    for (const d of [1e3, 1e6, 1, 1e4, 1e5, 1e2]) {
+      if (okVN(mx / d, my / d)) { model.origin = [0, 0]; return d; }
+      for (const o of ORIGINS) {
+        if (!o[0]) continue;
+        if (Math.max(Math.abs(mx / d), Math.abs(my / d)) > 10000 && okVN(mx / d + o[0], my / d + o[1])) { model.origin = o; return d; }
+      }
+    }
     const m = Math.max(Math.abs(mx), Math.abs(my));
     return m >= 1e8 ? 1e6 : m >= 1e5 ? 1e3 : 1;
   }
